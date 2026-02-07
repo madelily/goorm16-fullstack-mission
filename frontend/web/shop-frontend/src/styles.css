@@ -20,6 +20,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
+  font-size: 16px;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Arial,
     sans-serif;
 }
@@ -106,6 +107,14 @@ img {
   font-size: 18px;
   font-weight: 900;
   letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brandIcon {
+  width: 18px;
+  height: 18px;
 }
 
 .nav {
@@ -113,6 +122,43 @@ img {
   align-items: center;
   gap: 10px;
   white-space: nowrap;
+}
+
+.iconLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+}
+
+.iconLink:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.cartBadge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--price);
+  color: #ffffff;
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 800;
 }
 
 .badge {
@@ -186,7 +232,7 @@ img {
 }
 
 .cartName {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -194,7 +240,7 @@ img {
 }
 
 .cartMeta {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .cartBottom {
@@ -205,7 +251,7 @@ img {
 }
 
 .cartLineTotal {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 900;
   color: var(--price);
 }
@@ -274,7 +320,7 @@ img {
 
 .title {
   margin: 0;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -282,7 +328,7 @@ img {
 .subtitle {
   margin: 6px 0 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
@@ -303,7 +349,7 @@ img {
 }
 
 .label {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
 }
 
@@ -330,7 +376,7 @@ img {
   background: var(--primary);
   color: white;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -362,7 +408,7 @@ img {
 .hint {
   margin: 4px 0 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.45;
 }
 
@@ -379,7 +425,7 @@ img {
 
 .sectionTitle {
   margin: 0;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -387,7 +433,7 @@ img {
 .sectionDesc {
   margin: 6px 0 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.4;
 }
 
@@ -399,7 +445,7 @@ img {
 
 .emptyTitle {
   margin: 0 0 6px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
 }
 
@@ -458,7 +504,7 @@ img {
 }
 
 .productName {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.25;
   display: -webkit-box;
@@ -468,13 +514,13 @@ img {
 }
 
 .productPrice {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--price);
 }
 
 .productDesc {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--muted);
   line-height: 1.35;
   display: -webkit-box;
@@ -532,7 +578,7 @@ img {
 
 .pdTitle {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -546,7 +592,7 @@ img {
 }
 
 .pdUnitValue {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 900;
   color: var(--price);
 }
@@ -588,7 +634,7 @@ img {
 }
 
 .pdSelectedName {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -644,7 +690,7 @@ img {
 .qtyValue {
   min-width: 24px;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
 }
 
@@ -681,13 +727,13 @@ img {
   margin: 0;
   padding: 0 0 10px;
   border-bottom: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 900;
 }
 
 .pdText {
   padding: 10px 0 0;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.55;
   white-space: pre-wrap;
 }

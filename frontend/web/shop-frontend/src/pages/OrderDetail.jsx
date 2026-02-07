@@ -2,14 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader.jsx";
 import { fetchOrder } from "../api/orders.js";
-
-function formatWon(value) {
-  try {
-    return new Intl.NumberFormat("ko-KR").format(value) + "원";
-  } catch {
-    return `${value}원`;
-  }
-}
+import { formatWon } from "../utils/format.js";
 
 export default function OrderDetail() {
   const { id } = useParams();
@@ -78,4 +71,3 @@ export default function OrderDetail() {
     </div>
   );
 }
-

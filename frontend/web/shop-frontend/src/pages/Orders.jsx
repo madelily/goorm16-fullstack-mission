@@ -4,14 +4,7 @@ import { fetchOrders } from "../api/orders.js";
 import { useCart } from "../cart/CartContext.jsx";
 import { mockProducts } from "../mocks/mockProducts.js";
 import SiteHeader from "../components/SiteHeader.jsx";
-
-function formatWon(value) {
-  try {
-    return new Intl.NumberFormat("ko-KR").format(value) + "원";
-  } catch {
-    return `${value}원`;
-  }
-}
+import { formatWon } from "../utils/format.js";
 
 function asList(data) {
   return Array.isArray(data) ? data : [];
@@ -189,7 +182,7 @@ export default function Orders() {
                     <span className="orderStatus">{o.status}</span>
                   </div>
                   <div className="orderMeta">
-                    <span className="muted">총액 {o.totalPrice}원</span>
+                    <span className="muted">총액 {formatWon(o.totalPrice)}</span>
                   </div>
                 </div>
               </li>

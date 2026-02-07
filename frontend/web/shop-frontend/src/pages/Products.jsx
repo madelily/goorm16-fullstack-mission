@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { mockProducts } from "../mocks/mockProducts.js";
 import SiteHeader from "../components/SiteHeader.jsx";
+import { formatWon } from "../utils/format.js";
 
 function optionToColor(option) {
   const key = String(option || "").trim().toLowerCase();
@@ -105,20 +106,20 @@ export default function Products() {
                     const colors = getColorOptions(p.options);
                     if (!colors) return null;
                     return (
-                    <div className="colorDots" aria-hidden="true">
-                      {colors.map((c, idx) => (
-                        <span
-                          key={`${c}-${idx}`}
-                          className="dot"
-                          style={{ backgroundColor: c }}
-                        />
-                      ))}
-                    </div>
+                      <div className="colorDots" aria-hidden="true">
+                        {colors.map((c, idx) => (
+                          <span
+                            key={`${c}-${idx}`}
+                            className="dot"
+                            style={{ backgroundColor: c }}
+                          />
+                        ))}
+                      </div>
                     );
                   })()}
 
                   <div className="productName">{p.name}</div>
-                  <div className="productPrice">{p.price}원</div>
+                  <div className="productPrice">{formatWon(p.price)}</div>
                   <div className="productDesc">
                     {p.shortDescription ? p.shortDescription : `재고 ${p.stock}`}
                   </div>

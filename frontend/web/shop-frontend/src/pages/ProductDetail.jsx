@@ -4,6 +4,7 @@ import { createOrder } from "../api/orders.js";
 import { mockProducts } from "../mocks/mockProducts.js";
 import { useCart } from "../cart/CartContext.jsx";
 import SiteHeader from "../components/SiteHeader.jsx";
+import { formatWon } from "../utils/format.js";
 
 function optionToColor(option) {
   const key = String(option || "").trim().toLowerCase();
@@ -30,14 +31,6 @@ function getColorOptions(options) {
   const colors = options.map(optionToColor);
   if (colors.some((c) => !c)) return null;
   return colors;
-}
-
-function formatWon(value) {
-  try {
-    return new Intl.NumberFormat("ko-KR").format(value) + "원";
-  } catch {
-    return `${value}원`;
-  }
 }
 
 export default function ProductDetail() {
@@ -351,7 +344,7 @@ export default function ProductDetail() {
                         ) : null}
 
                         <div className="productName">{p.name}</div>
-                        <div className="productPrice">{p.price}원</div>
+                        <div className="productPrice">{formatWon(p.price)}</div>
                         <div className="productDesc">{p.shortDescription}</div>
                       </Link>
                     </li>

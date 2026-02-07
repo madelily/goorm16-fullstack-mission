@@ -2,14 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader.jsx";
 import { fetchOrders } from "../api/orders.js";
-
-function formatWon(value) {
-  try {
-    return new Intl.NumberFormat("ko-KR").format(value) + "원";
-  } catch {
-    return `${value}원`;
-  }
-}
+import { formatWon } from "../utils/format.js";
 
 export default function OrderHistory() {
   const navigate = useNavigate();
@@ -85,4 +78,3 @@ export default function OrderHistory() {
     </div>
   );
 }
-
