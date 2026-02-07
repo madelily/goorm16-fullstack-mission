@@ -7,13 +7,22 @@
   --price: #ef4444;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
+}
+
+/* SPA root should never create horizontal scroll on mobile */
+#root {
+  min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -34,7 +43,8 @@ body::after {
   line-height: 1.5;
   padding: 12px 12px 20px;
   margin: 0 auto;
-  width: min(768px, 100%);
+  width: 100%;
+  max-width: 768px;
   border-top: 1px solid var(--border);
 }
 
