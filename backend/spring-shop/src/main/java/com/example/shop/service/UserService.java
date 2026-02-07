@@ -6,15 +6,18 @@ import com.example.shop.repository.UserRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 @Transactional
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User signup(User user) {
@@ -22,7 +25,8 @@ public class UserService {
             throw new IllegalStateException("이미 사용 중인 이메일입니다.");
         }
 
-        User newUser = new User(user.getEmail(), user.getPassword(), Role.USER);
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        User newUser = new User(user.getEmail(), encodedPassword, Role.USER);
         return userRepository.save(newUser);
     }
 
@@ -37,4 +41,3 @@ public class UserService {
                 .orElseThrow(() -> new IllegalStateException("사용자를 찾을 수 없습니다."));
     }
 }
-
