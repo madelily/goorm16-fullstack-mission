@@ -70,6 +70,10 @@ public class Order {
         return status;
     }
 
+    public void setStatus(OrderStatus status) {
+        this.status = Objects.requireNonNull(status, "status");
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -87,4 +91,3 @@ public class Order {
         return (id == null) ? 0 : id.hashCode();
     }
 }
-
