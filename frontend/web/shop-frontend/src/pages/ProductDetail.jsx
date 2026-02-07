@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { createOrder } from "../api/orders.js";
 import { mockProducts } from "../mocks/mockProducts.js";
 import { useCart } from "../cart/CartContext.jsx";
+import SiteHeader from "../components/SiteHeader.jsx";
 
 function optionToColor(option) {
   const key = String(option || "").trim().toLowerCase();
@@ -163,22 +164,7 @@ export default function ProductDetail() {
 
   return (
     <div className="page">
-      <header className="siteHeader">
-        <Link to="/products" className="brand">
-          Shop
-        </Link>
-        <nav className="nav">
-          <Link to="/login" className="navLink">
-            로그인
-          </Link>
-          <Link to="/orders" className="navLink">
-            장바구니 <span className="badge">{cart.totalCount}</span>
-          </Link>
-          <Link to="/orders" className="navLink">
-            주문내역
-          </Link>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <main>
         {loading && <p className="muted">로딩 중...</p>}

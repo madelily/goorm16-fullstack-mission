@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { mockProducts } from "../mocks/mockProducts.js";
-import { useCart } from "../cart/CartContext.jsx";
+import SiteHeader from "../components/SiteHeader.jsx";
 
 function optionToColor(option) {
   const key = String(option || "").trim().toLowerCase();
@@ -31,7 +31,6 @@ function getColorOptions(options) {
 }
 
 export default function Products() {
-  const cart = useCart();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
@@ -66,22 +65,7 @@ export default function Products() {
 
   return (
     <div className="page">
-      <header className="siteHeader">
-        <Link to="/products" className="brand">
-          Shop
-        </Link>
-        <nav className="nav">
-          <Link to="/login" className="navLink">
-            로그인
-          </Link>
-          <Link to="/orders" className="navLink">
-            장바구니 <span className="badge">{cart.totalCount}</span>
-          </Link>
-          <Link to="/orders" className="navLink">
-            주문내역
-          </Link>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <main>
         <div className="sectionHeader">
