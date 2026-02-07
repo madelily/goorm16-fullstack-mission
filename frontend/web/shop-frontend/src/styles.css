@@ -23,6 +23,19 @@ body {
     sans-serif;
 }
 
+body::after {
+  content: "Sample Shop\A© 2026 Sample Shop. All rights reserved.\A고객센터: 0000-0000\A이메일: help@sampleshop.test";
+  display: block;
+  white-space: pre-line;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 12px 12px 20px;
+  margin: 0 auto;
+  width: min(768px, 100%);
+  border-top: 1px solid var(--border);
+}
+
 code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
@@ -72,6 +85,7 @@ img {
   display: flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
 }
 
 .navLink {
@@ -159,6 +173,26 @@ img {
   cursor: not-allowed;
 }
 
+.buttonSecondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.select {
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 0;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  outline: none;
+}
+
+.select:focus {
+  border-color: var(--primary);
+}
+
 .hint {
   margin: 4px 0 0;
   color: var(--muted);
@@ -203,6 +237,277 @@ img {
   font-weight: 800;
 }
 
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+}
+
+.gridItem {
+  margin: 0;
+  padding: 0;
+}
+
+.productCard {
+  display: grid;
+  gap: 6px;
+  color: inherit;
+  text-decoration: none;
+  padding: 0;
+}
+
+.productCard:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.productImage {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--border);
+  background: transparent;
+}
+
+.colorDots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.productName {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.productPrice {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.productDesc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.pdTop {
+  display: grid;
+  gap: 12px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 640px) {
+  .pdTop {
+    grid-template-columns: 1.3fr 1fr;
+    align-items: start;
+    gap: 14px;
+  }
+}
+
+.pdMainImage {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--border);
+  background: transparent;
+}
+
+.pdThumbs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px 0 0;
+}
+
+.pdThumbBtn {
+  padding: 0;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: 0;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+}
+
+.pdThumbBtn.isActive {
+  border-color: var(--primary);
+}
+
+.pdInfo {
+  display: grid;
+  gap: 10px;
+}
+
+.pdTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.pdPrice {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.pdField {
+  display: grid;
+  gap: 6px;
+}
+
+.pdOptionRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.pdQtySummary {
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+  min-width: 64px;
+}
+
+.pdQtyValue {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.pdSelectedList {
+  display: grid;
+  gap: 8px;
+  padding: 10px 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.pdSelectedItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.pdSelectedName {
+  font-size: 13px;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pdLabel {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.pdDivider {
+  height: 1px;
+  background: var(--border);
+}
+
+.pdSelected {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.pdQty {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.qtyControl {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qtyButton {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.qtyValue {
+  min-width: 24px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.pdActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.pdSection {
+  padding: 12px 0 0;
+}
+
+.pdSectionTitle {
+  margin: 0;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.pdText {
+  padding: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.pdWideImages {
+  padding: 10px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.pdWideImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border);
+}
+
 .list {
   list-style: none;
   padding: 0;
@@ -221,6 +526,7 @@ img {
   padding: 10px 0;
   color: inherit;
   text-decoration: none;
+  align-items: center;
 }
 
 .listItemLink:focus-visible {
@@ -229,28 +535,38 @@ img {
 }
 
 .thumb {
-  width: 56px;
-  height: 56px;
+  width: 88px;
+  height: 88px;
   border: 1px solid var(--border);
   background: transparent;
   flex: 0 0 auto;
 }
 
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 .itemBody {
   flex: 1;
   min-width: 0;
-}
-
-.itemTop {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
+  display: grid;
+  gap: 4px;
 }
 
 .itemName {
   font-size: 14px;
   font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemDesc {
+  font-size: 12px;
+  color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -303,6 +619,18 @@ img {
 }
 
 .detailThumb {
+  width: 72px;
+  height: 72px;
+}
+
+.imageStrip {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stripThumb {
   width: 72px;
   height: 72px;
 }
