@@ -371,6 +371,18 @@ img {
   line-height: 1.2;
 }
 
+.pdUnitPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.pdUnitValue {
+  font-size: 16px;
+  font-weight: 900;
+}
+
 .pdPrice {
   font-size: 16px;
   font-weight: 900;
@@ -381,30 +393,21 @@ img {
   gap: 6px;
 }
 
-.pdOptionRow {
-  display: grid;
-  grid-template-columns: 1fr auto;
+.pdTableHeader {
+  display: flex;
+  justify-content: space-between;
   gap: 10px;
-  align-items: end;
-}
-
-.pdQtySummary {
-  display: grid;
-  gap: 6px;
-  justify-items: end;
-  min-width: 64px;
-}
-
-.pdQtyValue {
-  font-size: 14px;
-  font-weight: 800;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .pdSelectedList {
   display: grid;
-  gap: 8px;
-  padding: 10px 0 0;
-  border-top: 1px solid var(--border);
+  gap: 0;
+  padding: 0;
 }
 
 .pdSelectedItem {
@@ -412,6 +415,8 @@ img {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .pdSelectedName {
@@ -420,6 +425,11 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.pdEmptyRow {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .pdLabel {
@@ -474,6 +484,24 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+
+.pdTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.pdTotalLabel {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pdTotalValue {
+  font-size: 16px;
+  font-weight: 900;
 }
 
 .pdSection {

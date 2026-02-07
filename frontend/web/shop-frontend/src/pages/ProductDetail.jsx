@@ -30,6 +30,14 @@ function getColorOptions(options) {
   return colors;
 }
 
+function formatWon(value) {
+  try {
+    return new Intl.NumberFormat("ko-KR").format(value) + "원";
+  } catch {
+    return `${value}원`;
+  }
+}
+
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -98,7 +106,6 @@ export default function ProductDetail() {
   }, [product]);
 
   async function onOrderClick() {
-    const hasOptions = product && Array.isArray(product.options) && product.options.length > 0;
     if (hasOptions && selectedOptions.length === 0) {
       alert("옵션을 선택해 주세요.");
       return;
@@ -107,10 +114,7 @@ export default function ProductDetail() {
     if (ordering) return;
     setOrdering(true);
     try {
-      const quantity = hasOptions
-        ? selectedOptions.reduce((sum, item) => sum + item.quantity, 0)
-        : 1;
-      await createOrder({ productId: Number(id), quantity, userId: 1 });
+      await createOrder({ productId: Number(id), quantity: Math.max(1, totalQuantity), userId: 1 });
       navigate("/orders");
     } catch {
       alert("주문 생성에 실패했습니다.");
@@ -129,6 +133,13 @@ export default function ProductDetail() {
   const recommended = mockProducts
     .filter((p) => p.id !== Number(id))
     .slice(0, 4);
+
+  const hasOptions = product && Array.isArray(product.options) && product.options.length > 0;
+  const totalQuantity = hasOptions
+    ? selectedOptions.reduce((sum, item) => sum + item.quantity, 0)
+    : 1;
+  const unitPrice = product?.price ?? 0;
+  const totalPrice = unitPrice * totalQuantity;
 
   function addOption(option) {
     if (!option) return;
@@ -206,43 +217,51 @@ export default function ProductDetail() {
               <div className="pdInfo">
                 <h1 className="pdTitle">{product.name}</h1>
 
-                {Array.isArray(product.options) && product.options.length > 0 ? (
-                  <>
-                    <div className="pdOptionRow">
-                      <label className="pdField">
-                        <span className="pdLabel">옵션 선택</span>
-                        <select
-                          className="select"
-                          value={optionSelectValue}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            setOptionSelectValue(value);
-                            addOption(value);
-                            setOptionSelectValue("");
-                          }}
-                        >
-                          <option value="" disabled>
-                            옵션을 선택하세요
-                          </option>
-                          {product.options.map((opt) => (
-                            <option key={opt} value={opt}>
-                              {opt}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
+                <div className="pdUnitPrice">
+                  <span className="pdLabel">단가</span>
+                  <span className="pdUnitValue">{formatWon(unitPrice)}</span>
+                </div>
 
-                      <div className="pdQtySummary" aria-label="총 수량">
-                        <span className="pdLabel">수량</span>
-                        <span className="pdQtyValue">
-                          {selectedOptions.reduce((sum, item) => sum + item.quantity, 0) || 0}
-                        </span>
-                      </div>
+                {hasOptions ? (
+                  <label className="pdField">
+                    <span className="pdLabel">옵션 선택</span>
+                    <select
+                      className="select"
+                      value={optionSelectValue}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        addOption(value);
+                        setOptionSelectValue("");
+                      }}
+                    >
+                      <option value="" disabled>
+                        옵션을 선택하세요
+                      </option>
+                      {product.options.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                ) : null}
+
+                <div className="pdDivider" />
+
+                {hasOptions ? (
+                  <>
+                    <div className="pdTableHeader" aria-hidden="true">
+                      <span>선택 옵션</span>
+                      <span>수량</span>
                     </div>
 
-                    {selectedOptions.length > 0 ? (
-                      <div className="pdSelectedList" aria-label="선택된 옵션 목록">
-                        {selectedOptions.map((item) => (
+                    <div className="pdSelectedList" aria-label="선택 옵션 리스트">
+                      {selectedOptions.length === 0 ? (
+                        <div className="pdEmptyRow">
+                          <span className="muted">옵션을 선택해 주세요.</span>
+                        </div>
+                      ) : (
+                        selectedOptions.map((item) => (
                           <div key={item.option} className="pdSelectedItem">
                             <span className="pdSelectedName">{item.option}</span>
                             <div className="qtyControl" aria-label={`${item.option} 수량`}>
@@ -265,17 +284,18 @@ export default function ProductDetail() {
                               </button>
                             </div>
                           </div>
-                        ))}
-                      </div>
-                    ) : null}
+                        ))
+                      )}
+                    </div>
                   </>
                 ) : null}
 
-                <div className="pdPrice">{product.price}원</div>
-
                 <div className="pdDivider" />
 
-                <div className="pdDivider" />
+                <div className="pdTotal">
+                  <span className="pdTotalLabel">총 금액</span>
+                  <span className="pdTotalValue">{formatWon(totalPrice)}</span>
+                </div>
 
                 <div className="pdActions">
                   <button type="button" className="button buttonSecondary" onClick={onCartClick}>
