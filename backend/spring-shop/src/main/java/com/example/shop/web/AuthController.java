@@ -35,12 +35,12 @@ public class AuthController {
     @GetMapping("/me")
     public ResponseEntity<MeResponse> me(Authentication authentication) {
         if (authentication == null || authentication.getName() == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.noContent().build();
         }
 
         String email = authentication.getName();
         return userRepository.findByEmail(email)
                 .map(user -> ResponseEntity.ok(MeResponse.from(user)))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+                .orElseGet(() -> ResponseEntity.noContent().build());
     }
 }

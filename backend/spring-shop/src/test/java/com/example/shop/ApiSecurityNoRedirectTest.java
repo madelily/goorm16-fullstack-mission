@@ -73,4 +73,11 @@ class ApiSecurityNoRedirectTest {
                 .andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:5173"))
                 .andExpect(header().string("Access-Control-Allow-Credentials", "true"));
     }
+
+    @Test
+    void authMe_unauthenticated_returns204_noRedirect() throws Exception {
+        mockMvc.perform(get("/api/auth/me"))
+                .andExpect(status().isNoContent())
+                .andExpect(header().doesNotExist("Location"));
+    }
 }
