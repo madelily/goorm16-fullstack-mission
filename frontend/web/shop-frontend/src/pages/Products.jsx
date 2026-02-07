@@ -32,14 +32,35 @@ export default function Products() {
 
   return (
     <div className="page">
-      <header className="header">
-        <h1 className="title">상품 목록</h1>
+      <header className="siteHeader">
+        <Link to="/products" className="brand">
+          Shop
+        </Link>
+        <nav className="nav">
+          <Link to="/login" className="navLink">
+            로그인
+          </Link>
+          <Link to="/orders" className="navLink">
+            주문내역
+          </Link>
+        </nav>
       </header>
+
       <main>
+        <div className="sectionHeader">
+          <h1 className="sectionTitle">상품</h1>
+          <p className="sectionDesc">모바일 웹 쇼핑몰 메인 화면</p>
+        </div>
+
         {loading && <p className="muted">로딩 중...</p>}
-        {!loading && error && <p className="muted">상품을 불러오지 못했습니다.</p>}
+        {!loading && error && (
+          <p className="muted">현재 상품을 불러올 수 없습니다.</p>
+        )}
         {!loading && !error && products.length === 0 && (
-          <p className="muted">상품이 없습니다</p>
+          <div className="empty">
+            <p className="emptyTitle">상품 준비 중입니다</p>
+            <p className="muted">등록된 상품이 없습니다.</p>
+          </div>
         )}
 
         {!loading && !error && products.length > 0 && (
