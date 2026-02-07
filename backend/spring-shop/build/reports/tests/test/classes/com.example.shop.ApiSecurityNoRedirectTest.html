@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">6</div>
+<div class="counter">7</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.209s</div>
+<div class="counter">0.863s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,32 +79,37 @@
 </thead>
 <tr>
 <td class="success">authMe_unauthenticated_returns204_noRedirect()</td>
-<td class="success">0.010s</td>
+<td class="success">0.057s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">corsPreflight_isPermitted_forApi()</td>
-<td class="success">0.011s</td>
+<td class="success">0.041s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">corsPreflight_isPermitted_forApi_whenOriginIs5174()</td>
-<td class="success">0.005s</td>
+<td class="success">0.048s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">ordersApi_unauthenticated_returns401_not302()</td>
-<td class="success">0.005s</td>
+<td class="success">0.039s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">productsDetail_isPublic_andNeverRedirectsToLogin()</td>
-<td class="success">0.171s</td>
+<td class="success">0.538s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">productsDetail_whenMissing_returns404_not500()</td>
+<td class="success">0.090s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">productsList_isPublic_andNeverRedirectsToLogin()</td>
-<td class="success">0.007s</td>
+<td class="success">0.050s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -112,8 +117,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>01:48:11.879 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.shop.ApiSecurityNoRedirectTest]: ApiSecurityNoRedirectTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-01:48:11.937 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.shop.Application for test class com.example.shop.ApiSecurityNoRedirectTest
+<pre>02:38:57.165 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.shop.ApiSecurityNoRedirectTest]: ApiSecurityNoRedirectTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+02:38:57.247 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.shop.Application for test class com.example.shop.ApiSecurityNoRedirectTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -123,26 +128,26 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.5)
 
-2026-02-08T01:48:12.124+09:00  INFO 13872 --- [    Test worker] c.e.shop.ApiSecurityNoRedirectTest       : Starting ApiSecurityNoRedirectTest using Java 17.0.17 with PID 13872 (started by lilylee_imac in /Users/lilylee_imac/Documents/딥다이브_풀스택16회차/2026_repo/00_team-shopping/goorm16-fullstack-mission/backend/spring-shop)
-2026-02-08T01:48:12.125+09:00  INFO 13872 --- [    Test worker] c.e.shop.ApiSecurityNoRedirectTest       : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2026-02-08T01:48:12.492+09:00  INFO 13872 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-02-08T01:48:12.523+09:00  INFO 13872 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 4 JPA repository interfaces.
-2026-02-08T01:48:13.308+09:00  INFO 13872 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-02-08T01:48:13.343+09:00  INFO 13872 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
-2026-02-08T01:48:13.363+09:00  INFO 13872 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-02-08T01:48:13.422+09:00  INFO 13872 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-02-08T01:48:13.438+09:00  INFO 13872 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-02-08T01:48:13.532+09:00  INFO 13872 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
-2026-02-08T01:48:13.533+09:00  INFO 13872 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-02-08T01:48:13.973+09:00  INFO 13872 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-02-08T01:48:14.003+09:00  INFO 13872 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-02-08T01:48:14.367+09:00  WARN 13872 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-02-08T01:48:14.595+09:00  INFO 13872 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@33ac7934, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@152bb4cc, org.springframework.security.web.context.SecurityContextHolderFilter@4d62bb8b, org.springframework.security.web.header.HeaderWriterFilter@28d2afd8, org.springframework.web.filter.CorsFilter@6f87bc6c, org.springframework.security.web.authentication.logout.LogoutFilter@64d0b8e3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@70f37190, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@178f5b5b, org.springframework.security.web.access.ExceptionTranslationFilter@1784d711, org.springframework.security.web.access.intercept.AuthorizationFilter@30b2d267]
-2026-02-08T01:48:14.605+09:00  INFO 13872 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Not [Ant [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@7d3b4646, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@175c4ae5, org.springframework.security.web.context.SecurityContextHolderFilter@1a345c6c, org.springframework.security.web.header.HeaderWriterFilter@2e729fea, org.springframework.web.filter.CorsFilter@21bf1b1f, org.springframework.security.web.authentication.logout.LogoutFilter@4a1abba1, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@20f94e9a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@17a756db, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2d10160a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b33e616, org.springframework.security.web.access.ExceptionTranslationFilter@54151d07, org.springframework.security.web.access.intercept.AuthorizationFilter@4a2bc71f]
-2026-02-08T01:48:14.823+09:00  INFO 13872 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-02-08T01:48:14.823+09:00  INFO 13872 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-02-08T01:48:14.824+09:00  INFO 13872 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-02-08T01:48:14.845+09:00  INFO 13872 --- [    Test worker] c.e.shop.ApiSecurityNoRedirectTest       : Started ApiSecurityNoRedirectTest in 2.843 seconds (process running for 3.346)
+2026-02-08T02:38:57.494+09:00  INFO 28180 --- [    Test worker] c.e.shop.ApiSecurityNoRedirectTest       : Starting ApiSecurityNoRedirectTest using Java 17.0.17 with PID 28180 (started by lilylee_imac in /Users/lilylee_imac/Documents/딥다이브_풀스택16회차/2026_repo/00_team-shopping/goorm16-fullstack-mission/backend/spring-shop)
+2026-02-08T02:38:57.495+09:00  INFO 28180 --- [    Test worker] c.e.shop.ApiSecurityNoRedirectTest       : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2026-02-08T02:38:57.930+09:00  INFO 28180 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-08T02:38:57.963+09:00  INFO 28180 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 29 ms. Found 4 JPA repository interfaces.
+2026-02-08T02:39:00.630+09:00  INFO 28180 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-08T02:39:00.808+09:00  INFO 28180 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-02-08T02:39:00.861+09:00  INFO 28180 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-08T02:39:01.073+09:00  INFO 28180 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-08T02:39:01.121+09:00  INFO 28180 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-08T02:39:01.429+09:00  INFO 28180 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-02-08T02:39:01.433+09:00  INFO 28180 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-08T02:39:02.035+09:00  INFO 28180 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-08T02:39:02.087+09:00  INFO 28180 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-08T02:39:02.532+09:00  WARN 28180 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-08T02:39:02.815+09:00  INFO 28180 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@178f5b5b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@47baf547, org.springframework.security.web.context.SecurityContextHolderFilter@6afdb486, org.springframework.security.web.header.HeaderWriterFilter@4d62bb8b, org.springframework.web.filter.CorsFilter@fffb4a8, org.springframework.security.web.authentication.logout.LogoutFilter@73ac7716, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@321bf4b1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5dc90de7, org.springframework.security.web.access.ExceptionTranslationFilter@3181fbe7, org.springframework.security.web.access.intercept.AuthorizationFilter@33ac7934]
+2026-02-08T02:39:02.825+09:00  INFO 28180 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Not [Ant [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@2b33e616, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@c1d9c40, org.springframework.security.web.context.SecurityContextHolderFilter@2d10160a, org.springframework.security.web.header.HeaderWriterFilter@17a756db, org.springframework.web.filter.CorsFilter@79e3f444, org.springframework.security.web.authentication.logout.LogoutFilter@20f94e9a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7d3b4646, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a1abba1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@67263db7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@205d6f84, org.springframework.security.web.access.ExceptionTranslationFilter@6b26839d, org.springframework.security.web.access.intercept.AuthorizationFilter@693c7741]
+2026-02-08T02:39:03.412+09:00  INFO 28180 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-08T02:39:03.413+09:00  INFO 28180 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-08T02:39:03.414+09:00  INFO 28180 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-02-08T02:39:03.458+09:00  INFO 28180 --- [    Test worker] c.e.shop.ApiSecurityNoRedirectTest       : Started ApiSecurityNoRedirectTest in 6.104 seconds (process running for 6.849)
 </pre>
 </span>
 </div>
@@ -154,7 +159,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.6</a> at 2026. 2. 8. 오전 1:48:15</p>
+<a href="http://www.gradle.org">Gradle 8.6</a> at 2026. 2. 8. 오전 2:39:04</p>
 </div>
 </div>
 </body>

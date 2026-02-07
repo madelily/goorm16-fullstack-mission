@@ -56,6 +56,14 @@ class ApiSecurityNoRedirectTest {
     }
 
     @Test
+    void productsDetail_whenMissing_returns404_not500() throws Exception {
+        mockMvc.perform(get("/api/products/999999"))
+                .andExpect(status().isNotFound())
+                .andExpect(header().doesNotExist("Location"))
+                .andExpect(header().string("Content-Type", org.hamcrest.Matchers.containsString(MediaType.APPLICATION_JSON_VALUE)));
+    }
+
+    @Test
     void ordersApi_unauthenticated_returns401_not302() throws Exception {
         mockMvc.perform(get("/api/orders"))
                 .andExpect(status().isUnauthorized())

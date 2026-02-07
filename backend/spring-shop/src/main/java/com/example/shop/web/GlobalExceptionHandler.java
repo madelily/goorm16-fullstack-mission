@@ -1,6 +1,7 @@
 package com.example.shop.web;
 
 import com.example.shop.service.DuplicateEmailException;
+import com.example.shop.service.ProductNotFoundException;
 import java.util.LinkedHashMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +31,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> illegalState(IllegalStateException e) {
         return ResponseEntity.badRequest().body(ApiError.of(e.getMessage()));
     }
-}
 
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ApiError> productNotFound(ProductNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiError.of(e.getMessage()));
+    }
+}
