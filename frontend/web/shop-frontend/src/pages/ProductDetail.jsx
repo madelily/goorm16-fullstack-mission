@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { createOrder } from "../api/orders.js";
 import { mockProducts } from "../mocks/mockProducts.js";
+import { useCart } from "../cart/CartContext.jsx";
 
 function optionToColor(option) {
   const key = String(option || "").trim().toLowerCase();
@@ -41,6 +42,7 @@ function formatWon(value) {
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const cart = useCart();
 
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
@@ -124,7 +126,8 @@ export default function ProductDetail() {
   }
 
   function onCartClick() {
-    alert("장바구니 기능은 준비 중입니다.");
+    cart.add(Number(id), Math.max(1, totalQuantity));
+    alert("장바구니에 담았습니다.");
   }
 
   const images = product && Array.isArray(product.images) ? product.images : [];
@@ -169,7 +172,7 @@ export default function ProductDetail() {
             로그인
           </Link>
           <Link to="/orders" className="navLink">
-            장바구니
+            장바구니 <span className="badge">{cart.totalCount}</span>
           </Link>
           <Link to="/orders" className="navLink">
             주문내역
