@@ -30,9 +30,8 @@ public class CorsConfig {
     public record CorsProperties(List<String> allowedOrigins) {
         public CorsProperties {
             if (allowedOrigins == null || allowedOrigins.isEmpty()) {
-                allowedOrigins = List.of("http://localhost:5173");
+                allowedOrigins = List.of("http://localhost:5173", "http://localhost:5174");
             }
         }
     }
 }
-

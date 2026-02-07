@@ -4,14 +4,19 @@ import com.example.shop.domain.user.User;
 import com.example.shop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @Transactional
 public class PasswordResetService {
+
+    private static final Logger log = LoggerFactory.getLogger(PasswordResetService.class);
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -56,7 +61,11 @@ public class PasswordResetService {
                 로그인 후 반드시 비밀번호를 변경해 주세요.
                 만약 본인이 요청하지 않았다면 고객센터로 문의해 주세요.
                 """.formatted(tempPassword));
-        mailSender.send(msg);
+        try {
+            mailSender.send(msg);
+        } catch (MailException e) {
+            log.warn("Failed to send temporary password email to {}: {}", to, e.getMessage());
+            log.debug("Temporary password email send failure stacktrace", e);
+        }
     }
 }
-

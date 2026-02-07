@@ -75,6 +75,18 @@ class ApiSecurityNoRedirectTest {
     }
 
     @Test
+    void corsPreflight_isPermitted_forApi_whenOriginIs5174() throws Exception {
+        mockMvc.perform(
+                        options("/api/products")
+                                .header("Origin", "http://localhost:5174")
+                                .header("Access-Control-Request-Method", "GET")
+                )
+                .andExpect(status().isOk())
+                .andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:5174"))
+                .andExpect(header().string("Access-Control-Allow-Credentials", "true"));
+    }
+
+    @Test
     void authMe_unauthenticated_returns204_noRedirect() throws Exception {
         mockMvc.perform(get("/api/auth/me"))
                 .andExpect(status().isNoContent())
