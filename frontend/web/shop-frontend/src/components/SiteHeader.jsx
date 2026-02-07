@@ -14,7 +14,7 @@ export default function SiteHeader() {
           로그인
         </Link>
         <Link to="/orders" className="navLink">
-          장바구니 <span className="badge">{cart.totalCount}</span>
+          장바구니 <span className="badge">{cart.itemCount}</span>
         </Link>
         <Link to="/orders/history" className="navLink">
           주문내역

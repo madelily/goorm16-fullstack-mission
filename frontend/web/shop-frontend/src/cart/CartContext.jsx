@@ -22,9 +22,11 @@ export function CartProvider({ children }) {
   }, []);
 
   const api = useMemo(() => {
+    const totalQuantity = cart.items.reduce((sum, it) => sum + it.quantity, 0);
     return {
       cart,
-      totalCount: cart.items.reduce((sum, it) => sum + it.quantity, 0),
+      itemCount: cart.items.length,
+      totalQuantity,
       add(productId, qty = 1) {
         setCart(addToCart(productId, qty));
       },
@@ -49,4 +51,3 @@ export function useCart() {
   if (!v) throw new Error("useCart must be used within CartProvider");
   return v;
 }
-

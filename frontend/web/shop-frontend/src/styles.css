@@ -1,9 +1,10 @@
 :root {
-  --bg: #0b1220;
-  --text: #e7eaf0;
-  --muted: #aab3c5;
-  --border: rgba(255, 255, 255, 0.2);
-  --primary: #4f7cff;
+  --bg: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: rgba(17, 24, 39, 0.14);
+  --primary: #2563eb;
+  --price: #ef4444;
 }
 
 * {
@@ -99,6 +100,7 @@ img {
   line-height: 1.4;
   text-align: center;
   color: var(--text);
+  background: rgba(17, 24, 39, 0.04);
 }
 
 .sectionHeaderTight {
@@ -119,6 +121,7 @@ img {
 .cartTotal {
   font-size: 14px;
   font-weight: 900;
+  color: var(--price);
 }
 
 .cartList {
@@ -178,6 +181,7 @@ img {
 .cartLineTotal {
   font-size: 13px;
   font-weight: 900;
+  color: var(--price);
 }
 
 .linkButton {
@@ -282,7 +286,7 @@ img {
   padding: 10px 10px;
   border-radius: 0;
   border: 1px solid var(--border);
-  background: transparent;
+  background: #ffffff;
   color: var(--text);
   outline: none;
 }
@@ -320,7 +324,7 @@ img {
   padding: 10px 10px;
   border-radius: 0;
   border: 1px solid var(--border);
-  background: transparent;
+  background: #ffffff;
   color: var(--text);
   outline: none;
 }
@@ -424,7 +428,7 @@ img {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(17, 24, 39, 0.22);
 }
 
 .productName {
@@ -440,6 +444,7 @@ img {
 .productPrice {
   font-size: 13px;
   font-weight: 800;
+  color: var(--price);
 }
 
 .productDesc {
@@ -517,6 +522,7 @@ img {
 .pdUnitValue {
   font-size: 16px;
   font-weight: 900;
+  color: var(--price);
 }
 
 .pdPrice {
@@ -638,6 +644,7 @@ img {
 .pdTotalValue {
   font-size: 16px;
   font-weight: 900;
+  color: var(--price);
 }
 
 .pdSection {
@@ -739,6 +746,7 @@ img {
 .itemPrice {
   font-size: 13px;
   font-weight: 700;
+  color: var(--price);
 }
 
 .itemMeta {
