@@ -7,12 +7,17 @@ import ProductDetail from "./pages/ProductDetail.jsx";
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/login" element={<Login />} />
+      {/* 공개 페이지 */}
+      <Route path="/" element={<Products />} />
       <Route path="/products" element={<Products />} />
       <Route path="/products/:id" element={<ProductDetail />} />
+      <Route path="/login" element={<Login />} />
+
+      {/* 로그인 필요 (서버에서 보호됨) */}
       <Route path="/orders" element={<Orders />} />
-      <Route path="*" element={<Navigate to="/login" replace />} />
+
+      {/* 그 외 */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
