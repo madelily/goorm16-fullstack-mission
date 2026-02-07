@@ -16,11 +16,10 @@ export default function SiteHeader() {
         <Link to="/orders" className="navLink">
           장바구니 <span className="badge">{cart.totalCount}</span>
         </Link>
-        <Link to="/orders" className="navLink">
+        <Link to="/orders/history" className="navLink">
           주문내역
         </Link>
       </nav>
     </header>
   );
 }
-

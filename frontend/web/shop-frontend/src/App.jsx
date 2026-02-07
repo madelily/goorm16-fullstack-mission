@@ -4,6 +4,8 @@ import Products from "./pages/Products.jsx";
 import Orders from "./pages/Orders.jsx";
 import ProductDetail from "./pages/ProductDetail.jsx";
 import Signup from "./pages/Signup.jsx";
+import OrderHistory from "./pages/OrderHistory.jsx";
+import OrderDetail from "./pages/OrderDetail.jsx";
 
 export default function App() {
   return (
@@ -17,6 +19,8 @@ export default function App() {
 
       {/* 로그인 필요 (서버에서 보호됨) */}
       <Route path="/orders" element={<Orders />} />
+      <Route path="/orders/history" element={<OrderHistory />} />
+      <Route path="/orders/history/:id" element={<OrderDetail />} />
 
       {/* 그 외 */}
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -38,3 +38,19 @@ export async function fetchOrders() {
   return res.json();
 }
 
+export async function fetchOrder(orderId) {
+  const res = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("FETCH_ORDER_FAILED");
+  }
+
+  const contentType = res.headers.get("content-type") || "";
+  if (contentType.includes("text/html")) {
+    throw new Error("NOT_AUTHENTICATED");
+  }
+
+  return res.json();
+}
