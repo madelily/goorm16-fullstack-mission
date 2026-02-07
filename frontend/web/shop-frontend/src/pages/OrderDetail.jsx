@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader.jsx";
-import { fetchOrder } from "../api/orders.js";
 import { formatWon } from "../utils/format.js";
 import SiteFooter from "../components/SiteFooter.jsx";
+import { ensureSeedOrders, findOrderById } from "../orders/storage.js";
 
 export default function OrderDetail() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!id) return;
@@ -18,13 +16,10 @@ export default function OrderDetail() {
 
     async function load() {
       setLoading(true);
-      setError(null);
       try {
-        const data = await fetchOrder(id);
-        if (!cancelled) setOrder(data);
-      } catch (e) {
-        if (!cancelled) setError(e);
-        if (e?.message === "NOT_AUTHENTICATED") navigate("/login");
+        ensureSeedOrders();
+        const found = findOrderById(id);
+        if (!cancelled) setOrder(found);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -34,7 +29,7 @@ export default function OrderDetail() {
     return () => {
       cancelled = true;
     };
-  }, [id, navigate]);
+  }, [id]);
 
   return (
     <div className="page">
@@ -48,26 +43,54 @@ export default function OrderDetail() {
         </div>
 
         {loading && <p className="muted">로딩 중...</p>}
-        {!loading && error && error.message !== "NOT_AUTHENTICATED" && (
-          <p className="muted">주문 정보를 불러오지 못했습니다.</p>
-        )}
+        {!loading && !order && <p className="muted">주문 정보를 찾을 수 없습니다.</p>}
 
-        {!loading && !error && order && (
-          <div className="detailLines">
-            <div className="line">
-              <span className="muted">주문번호</span>
-              <span>#{order.id}</span>
+        {!loading && order ? (
+          <>
+            <div className="detailLines">
+              <div className="line">
+                <span className="muted">주문번호</span>
+                <span>#{order.id}</span>
+              </div>
+              <div className="line">
+                <span className="muted">주문일자</span>
+                <span>{order.createdAt ? new Date(order.createdAt).toLocaleString("ko-KR") : "-"}</span>
+              </div>
+              <div className="line">
+                <span className="muted">상태</span>
+                <span>{order.status === "PAID" ? "결제완료" : order.status}</span>
+              </div>
+              <div className="line">
+                <span className="muted">결제 금액</span>
+                <span>{formatWon(order.totalPrice)}</span>
+              </div>
             </div>
-            <div className="line">
-              <span className="muted">상태</span>
-              <span>{order.status}</span>
+
+            <div className="sectionHeader sectionHeaderTight">
+              <h2 className="sectionTitle">주문 상품</h2>
+              <p className="sectionDesc">주문 상품 목록 요약</p>
             </div>
-            <div className="line">
-              <span className="muted">총액</span>
-              <span>{formatWon(order.totalPrice)}</span>
+
+            <ul className="list">
+              {(Array.isArray(order.items) ? order.items : []).map((it) => (
+                <li key={`${it.productId}-${it.name}`} className="listItem">
+                  <div className="orderItemRow">
+                    <span className="orderItemName">{it.name}</span>
+                    <span className="muted">
+                      {it.quantity}개 · {formatWon((Number(it.price) || 0) * (Number(it.quantity) || 0))}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className="pageActions">
+              <Link className="button" to="/orders/history">
+                주문내역으로 이동
+              </Link>
             </div>
-          </div>
-        )}
+          </>
+        ) : null}
       </main>
       <SiteFooter />
     </div>

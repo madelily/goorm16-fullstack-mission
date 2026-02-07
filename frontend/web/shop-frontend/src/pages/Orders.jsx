@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { fetchOrders } from "../api/orders.js";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../cart/CartContext.jsx";
 import { mockProducts } from "../mocks/mockProducts.js";
 import SiteHeader from "../components/SiteHeader.jsx";
 import { formatWon } from "../utils/format.js";
 import SiteFooter from "../components/SiteFooter.jsx";
+import { createPaidOrderFromCart } from "../orders/storage.js";
 
 function asList(data) {
   return Array.isArray(data) ? data : [];
 }
 
 export default function Orders() {
+  const navigate = useNavigate();
   const cart = useCart();
 
-  const [loading, setLoading] = useState(false);
-  const [orders, setOrders] = useState([]);
-  const [error, setError] = useState(null);
   const [catalog, setCatalog] = useState([]);
+  const [payOpen, setPayOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -40,28 +39,6 @@ export default function Orders() {
     };
   }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    async function loadOrders() {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await fetchOrders();
-        if (!cancelled) setOrders(asList(data));
-      } catch (e) {
-        if (!cancelled) setError(e);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    }
-
-    loadOrders();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   const byId = new Map(catalog.map((p) => [Number(p.id), p]));
   const cartItems = cart.cart.items.map((it) => {
     const product = byId.get(it.productId) || null;
@@ -72,6 +49,21 @@ export default function Orders() {
     const price = Number(it.product?.price) || 0;
     return sum + price * it.quantity;
   }, 0);
+
+  function openPay() {
+    if (cartItems.length === 0) return;
+    setPayOpen(true);
+  }
+
+  function confirmMockPay() {
+    const order = createPaidOrderFromCart(cartItems, {
+      totalQuantity: cartTotalQuantity,
+      totalPrice: cartTotalPrice,
+    });
+    cart.clear();
+    setPayOpen(false);
+    navigate(`/orders/history/${order.id}`);
+  }
 
   return (
     <div className="page">
@@ -92,11 +84,6 @@ export default function Orders() {
           </div>
         ) : (
           <>
-            <div className="cartSummary">
-              <span className="muted">총 {cartTotalQuantity}개</span>
-              <span className="cartTotal">{formatWon(cartTotalPrice)}</span>
-            </div>
-
             <ul className="cartList">
               {cartItems.map((it) => (
                 <li key={it.productId} className="cartItem">
@@ -154,44 +141,43 @@ export default function Orders() {
                 </li>
               ))}
             </ul>
+
+            <div className="orderSummary">
+              <div className="summaryRow">
+                <span className="muted">총 수량</span>
+                <span>{cartTotalQuantity}개</span>
+              </div>
+              <div className="summaryRow">
+                <span className="muted">총 금액</span>
+                <span className="summaryPrice">{formatWon(cartTotalPrice)}</span>
+              </div>
+              <button type="button" className="button" onClick={openPay}>
+                결제하기
+              </button>
+              <p className="hint">현재는 실제 결제가 진행되지 않습니다.</p>
+            </div>
           </>
-        )}
-
-        <div className="sectionHeader sectionHeaderTight">
-          <h2 className="sectionTitle">주문내역</h2>
-          <p className="sectionDesc">로그인한 경우에만 조회됩니다.</p>
-        </div>
-
-        {loading && <p className="muted">로딩 중...</p>}
-        {!loading && error && error.message === "NOT_AUTHENTICATED" && (
-          <p className="muted">
-            주문내역을 보려면 <Link to="/login">로그인</Link>이 필요합니다.
-          </p>
-        )}
-        {!loading && error && error.message !== "NOT_AUTHENTICATED" && (
-          <p className="muted">주문내역을 불러오지 못했습니다.</p>
-        )}
-        {!loading && !error && orders.length === 0 && <p className="muted">주문이 없습니다</p>}
-
-        {!loading && !error && orders.length > 0 && (
-          <ul className="list">
-            {orders.map((o) => (
-              <li key={o.id} className="listItem">
-                <div className="orderRow">
-                  <div className="orderTop">
-                    <span className="orderId">주문 #{o.id}</span>
-                    <span className="orderStatus">{o.status}</span>
-                  </div>
-                  <div className="orderMeta">
-                    <span className="muted">총액 {formatWon(o.totalPrice)}</span>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
         )}
       </main>
       <SiteFooter />
+
+      {payOpen ? (
+        <div className="overlay" role="dialog" aria-modal="true" aria-label="가짜 결제 안내">
+          <div className="overlayPanel">
+            <h2 className="overlayTitle">가짜 결제</h2>
+            <p className="overlayText">
+              현재는 실제 결제가 진행되지 않습니다.
+              <br />
+              확인 버튼을 누르면 결제가 완료된 것으로 처리됩니다.
+            </p>
+            <div className="overlayActions">
+              <button type="button" className="button" onClick={confirmMockPay}>
+                확인
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

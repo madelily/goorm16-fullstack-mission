@@ -21,6 +21,9 @@ export default function SiteHeader() {
               {cart.itemCount}
             </span>
           </Link>
+          <Link to="/orders/history" className="iconLink" aria-label="주문내역">
+            <ReceiptText className="icon" aria-hidden="true" />
+          </Link>
 
           {auth.status !== "authenticated" ? (
             <Link to="/login" className="iconLink" aria-label="로그인">
@@ -28,9 +31,6 @@ export default function SiteHeader() {
             </Link>
           ) : (
             <>
-              <Link to="/orders/history" className="iconLink" aria-label="주문내역">
-                <ReceiptText className="icon" aria-hidden="true" />
-              </Link>
               <button type="button" className="iconLink" aria-label="로그아웃" onClick={auth.logout}>
                 <LogOut className="icon" aria-hidden="true" />
               </button>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { createOrder } from "../api/orders.js";
 import { mockProducts } from "../mocks/mockProducts.js";
 import { useCart } from "../cart/CartContext.jsx";
 import SiteHeader from "../components/SiteHeader.jsx";
@@ -111,10 +110,8 @@ export default function ProductDetail() {
     if (ordering) return;
     setOrdering(true);
     try {
-      await createOrder({ productId: Number(id), quantity: Math.max(1, totalQuantity), userId: 1 });
+      cart.add(Number(id), Math.max(1, totalQuantity));
       navigate("/orders");
-    } catch {
-      alert("주문 생성에 실패했습니다.");
     } finally {
       setOrdering(false);
     }

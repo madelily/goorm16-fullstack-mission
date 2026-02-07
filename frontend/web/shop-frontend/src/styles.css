@@ -5,6 +5,8 @@
   --border: rgba(17, 24, 39, 0.14);
   --primary: #2563eb;
   --price: #ef4444;
+  --header-height: 56px;
+  --footer-height: 116px;
 }
 
 *,
@@ -41,9 +43,15 @@ body::after {
 /* Footer */
 .siteFooter {
   width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: var(--bg);
   border-top: 1px solid var(--border);
-  margin-top: 18px;
-  padding: 12px 0 18px;
+  margin-top: 0;
+  padding: 12px 0 14px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.5;
@@ -85,19 +93,25 @@ img {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0;
+  padding: var(--header-height) 0 var(--footer-height);
   width: 100%;
   margin: 0;
 }
 
 .siteHeader {
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0;
-  margin: 0 0 10px;
-  padding: 0 0 10px;
+  margin: 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -333,6 +347,79 @@ img {
 .rowLink:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+}
+
+.orderSummary {
+  border-top: 1px solid var(--border);
+  padding: 10px 0 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 8px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.summaryPrice {
+  font-weight: 900;
+  color: var(--price);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+}
+
+.overlayPanel {
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  padding: 14px 14px;
+}
+
+.overlayTitle {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.overlayText {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.overlayActions {
+  margin-top: 12px;
+}
+
+.pageActions {
+  margin-top: 12px;
+}
+
+.orderItemRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.orderItemName {
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .detailLines {
