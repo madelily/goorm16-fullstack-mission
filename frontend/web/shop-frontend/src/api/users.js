@@ -1,10 +1,9 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
-
 export async function signup({ email, password, name }) {
-  const res = await fetch(`${API_BASE_URL}/api/users/signup`, {
+  const res = await fetch(`/api/users/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
     credentials: "include",
     body: JSON.stringify({ email, password, name }),
@@ -27,4 +26,3 @@ export async function signup({ email, password, name }) {
 
   return payload;
 }
-

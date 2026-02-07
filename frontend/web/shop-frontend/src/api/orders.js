@@ -1,5 +1,3 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
-
 const DEFAULT_USER_ID = 1;
 const DEFAULT_QUANTITY = 1;
 
@@ -9,11 +7,14 @@ export async function createOrder({ productId, userId = DEFAULT_USER_ID, quantit
   params.set("productId", String(productId));
   params.set("quantity", String(quantity));
 
-  const res = await fetch(`${API_BASE_URL}/api/orders?${params.toString()}`, {
+  const res = await fetch(`/api/orders?${params.toString()}`, {
     method: "POST",
     credentials: "include",
   });
 
+  if (res.status === 401 || res.status === 403) {
+    throw new Error("NOT_AUTHENTICATED");
+  }
   if (!res.ok) {
     throw new Error("CREATE_ORDER_FAILED");
   }
@@ -22,34 +23,30 @@ export async function createOrder({ productId, userId = DEFAULT_USER_ID, quantit
 }
 
 export async function fetchOrders() {
-  const res = await fetch(`${API_BASE_URL}/api/orders`, {
+  const res = await fetch(`/api/orders`, {
     credentials: "include",
   });
 
+  if (res.status === 401 || res.status === 403) {
+    throw new Error("NOT_AUTHENTICATED");
+  }
   if (!res.ok) {
     throw new Error("FETCH_ORDERS_FAILED");
-  }
-
-  const contentType = res.headers.get("content-type") || "";
-  if (contentType.includes("text/html")) {
-    throw new Error("NOT_AUTHENTICATED");
   }
 
   return res.json();
 }
 
 export async function fetchOrder(orderId) {
-  const res = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
+  const res = await fetch(`/api/orders/${orderId}`, {
     credentials: "include",
   });
 
+  if (res.status === 401 || res.status === 403) {
+    throw new Error("NOT_AUTHENTICATED");
+  }
   if (!res.ok) {
     throw new Error("FETCH_ORDER_FAILED");
-  }
-
-  const contentType = res.headers.get("content-type") || "";
-  if (contentType.includes("text/html")) {
-    throw new Error("NOT_AUTHENTICATED");
   }
 
   return res.json();

@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "../api/auth.js";
 import SiteHeader from "../components/SiteHeader.jsx";
 import SiteFooter from "../components/SiteFooter.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 
 export default function Login() {
   const navigate = useNavigate();
+  const auth = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -26,6 +28,7 @@ export default function Login() {
       else localStorage.removeItem("shop.auth.email");
 
       await login({ email, password });
+      await auth.refresh();
       navigate("/products");
     } catch {
       alert("로그인에 실패했습니다.");

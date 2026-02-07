@@ -15,6 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -52,6 +55,11 @@ public class SecurityConfig {
     @Bean
     @Order(2)
     public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
+        var defaultSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+        defaultSuccessHandler.setDefaultTargetUrl("/");
+
+        var defaultFailureHandler = new SimpleUrlAuthenticationFailureHandler("/login?error");
+
         http
                 .securityMatcher(new NegatedRequestMatcher(new AntPathRequestMatcher("/api/**")))
                 .cors(Customizer.withDefaults())
@@ -69,12 +77,45 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .loginProcessingUrl("/login")
                         .usernameParameter("email")
+                        .successHandler((request, response, authentication) -> {
+                            if (isJsonClient(request)) {
+                                response.setStatus(HttpStatus.NO_CONTENT.value());
+                                return;
+                            }
+                            defaultSuccessHandler.onAuthenticationSuccess(request, response, authentication);
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            if (isJsonClient(request)) {
+                                response.sendError(HttpStatus.UNAUTHORIZED.value());
+                                return;
+                            }
+                            defaultFailureHandler.onAuthenticationFailure(request, response, exception);
+                        })
                         .permitAll()
                 )
-                .logout(Customizer.withDefaults());
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            if (isJsonClient(request)) {
+                                response.setStatus(HttpStatus.NO_CONTENT.value());
+                                return;
+                            }
+                            response.sendRedirect("/");
+                        })
+                );
 
         return http.build();
+    }
+
+    private static boolean isJsonClient(HttpServletRequest request) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            return true;
+        }
+        String requestedWith = request.getHeader("X-Requested-With");
+        return requestedWith != null && requestedWith.equalsIgnoreCase("XMLHttpRequest");
     }
 
     @Bean
