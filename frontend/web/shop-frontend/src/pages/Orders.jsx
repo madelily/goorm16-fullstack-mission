@@ -5,6 +5,7 @@ import { useCart } from "../cart/CartContext.jsx";
 import { mockProducts } from "../mocks/mockProducts.js";
 import SiteHeader from "../components/SiteHeader.jsx";
 import { formatWon } from "../utils/format.js";
+import SiteFooter from "../components/SiteFooter.jsx";
 
 function asList(data) {
   return Array.isArray(data) ? data : [];
@@ -75,7 +76,7 @@ export default function Orders() {
   return (
     <div className="page">
       <SiteHeader />
-      <main>
+      <main className="container pageMain">
         <div className="sectionHeader">
           <h1 className="sectionTitle">장바구니</h1>
           <p className="sectionDesc">비로그인 상태에서도 담은 상품이 유지됩니다.</p>
@@ -190,6 +191,7 @@ export default function Orders() {
           </ul>
         )}
       </main>
+      <SiteFooter />
     </div>
   );
 }

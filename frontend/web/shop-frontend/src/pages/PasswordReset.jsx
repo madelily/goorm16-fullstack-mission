@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader.jsx";
+import SiteFooter from "../components/SiteFooter.jsx";
 
 export default function PasswordReset() {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ export default function PasswordReset() {
           </button>
         </form>
       </main>
+      <SiteFooter />
     </div>
   );
 }
-

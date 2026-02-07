@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../api/users.js";
 import SiteHeader from "../components/SiteHeader.jsx";
+import SiteFooter from "../components/SiteFooter.jsx";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -80,6 +81,7 @@ export default function Signup() {
           </button>
         </form>
       </main>
+      <SiteFooter />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader.jsx";
 import { fetchOrders } from "../api/orders.js";
 import { formatWon } from "../utils/format.js";
+import SiteFooter from "../components/SiteFooter.jsx";
 
 export default function OrderHistory() {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function OrderHistory() {
   return (
     <div className="page">
       <SiteHeader />
-      <main>
+      <main className="container pageMain">
         <div className="sectionHeader">
           <h1 className="sectionTitle">주문내역</h1>
           <p className="sectionDesc">로그인한 사용자만 조회할 수 있습니다.</p>
@@ -75,6 +76,7 @@ export default function OrderHistory() {
           </ul>
         )}
       </main>
+      <SiteFooter />
     </div>
   );
 }

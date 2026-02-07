@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader.jsx";
 import { fetchOrder } from "../api/orders.js";
 import { formatWon } from "../utils/format.js";
+import SiteFooter from "../components/SiteFooter.jsx";
 
 export default function OrderDetail() {
   const { id } = useParams();
@@ -38,7 +39,7 @@ export default function OrderDetail() {
   return (
     <div className="page">
       <SiteHeader />
-      <main>
+      <main className="container pageMain">
         <div className="sectionHeader">
           <h1 className="sectionTitle">주문 상세</h1>
           <p className="sectionDesc">
@@ -68,6 +69,7 @@ export default function OrderDetail() {
           </div>
         )}
       </main>
+      <SiteFooter />
     </div>
   );
 }

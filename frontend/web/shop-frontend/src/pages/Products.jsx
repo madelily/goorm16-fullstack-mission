@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { mockProducts } from "../mocks/mockProducts.js";
 import SiteHeader from "../components/SiteHeader.jsx";
 import { formatWon } from "../utils/format.js";
+import SiteFooter from "../components/SiteFooter.jsx";
 
 function optionToColor(option) {
   const key = String(option || "").trim().toLowerCase();
@@ -68,7 +69,7 @@ export default function Products() {
     <div className="page">
       <SiteHeader />
 
-      <main>
+      <main className="container pageMain">
         <div className="sectionHeader">
           <h1 className="sectionTitle">상품</h1>
           <p className="sectionDesc">모바일 웹 쇼핑몰 메인 화면</p>
@@ -129,6 +130,7 @@ export default function Products() {
           </ul>
         )}
       </main>
+      <SiteFooter />
     </div>
   );
 }

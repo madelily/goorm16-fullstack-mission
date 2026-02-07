@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../api/auth.js";
 import SiteHeader from "../components/SiteHeader.jsx";
+import SiteFooter from "../components/SiteFooter.jsx";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -95,6 +96,7 @@ export default function Login() {
           </p>
         </form>
       </main>
+      <SiteFooter />
     </div>
   );
 }

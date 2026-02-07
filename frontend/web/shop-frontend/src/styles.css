@@ -35,17 +35,32 @@ body {
 }
 
 body::after {
-  content: "Sample Shop\A© 2026 Sample Shop. All rights reserved.\A고객센터: 0000-0000\A이메일: help@sampleshop.test";
-  display: block;
-  white-space: pre-line;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
-  padding: 12px 12px 20px;
-  margin: 0 auto;
+  content: none;
+}
+
+/* Footer */
+.siteFooter {
   width: 100%;
-  max-width: 768px;
   border-top: 1px solid var(--border);
+  margin-top: 18px;
+  padding: 12px 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.footerInner {
+  display: grid;
+  gap: 4px;
+}
+
+.footerBrand {
+  font-weight: 900;
+  color: var(--text);
+}
+
+.footerText {
+  color: var(--muted);
 }
 
 code {
@@ -70,33 +85,55 @@ img {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 12px 12px 24px;
-  width: min(768px, 100%);
-  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  margin: 0;
 }
 
 .siteHeader {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: center;
+  gap: 0;
   margin: 0 0 10px;
   padding: 0 0 10px;
   border-bottom: 1px solid var(--border);
 }
 
+.container {
+  width: 100%;
+  max-width: 768px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pageMain {
+  flex: 1;
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .authHeader {
-  max-width: 480px;
+  max-width: 420px;
   width: 100%;
   margin: 0 auto 10px;
-  padding: 0 0 10px;
+  padding: 0 16px 10px;
   border-bottom: 1px solid var(--border);
 }
 
 .authMain {
-  max-width: 480px;
+  max-width: 420px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 16px;
 }
 
 .checkRow {

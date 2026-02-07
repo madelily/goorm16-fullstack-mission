@@ -5,6 +5,7 @@ import { mockProducts } from "../mocks/mockProducts.js";
 import { useCart } from "../cart/CartContext.jsx";
 import SiteHeader from "../components/SiteHeader.jsx";
 import { formatWon } from "../utils/format.js";
+import SiteFooter from "../components/SiteFooter.jsx";
 
 function optionToColor(option) {
   const key = String(option || "").trim().toLowerCase();
@@ -159,7 +160,7 @@ export default function ProductDetail() {
     <div className="page">
       <SiteHeader />
 
-      <main>
+      <main className="container pageMain">
         {loading && <p className="muted">로딩 중...</p>}
         {!loading && error && <p className="muted">상품을 불러오지 못했습니다.</p>}
 
@@ -355,6 +356,7 @@ export default function ProductDetail() {
           </>
         )}
       </main>
+      <SiteFooter />
     </div>
   );
 }
