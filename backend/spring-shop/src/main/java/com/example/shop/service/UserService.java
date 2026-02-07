@@ -21,12 +21,16 @@ public class UserService {
     }
 
     public User signup(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new IllegalStateException("이미 사용 중인 이메일입니다.");
+        return signup(user.getEmail(), user.getPassword(), user.getName());
+    }
+
+    public User signup(String email, String password, String name) {
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new DuplicateEmailException();
         }
 
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        User newUser = new User(user.getEmail(), encodedPassword, Role.USER);
+        String encodedPassword = passwordEncoder.encode(password);
+        User newUser = new User(email, encodedPassword, name, Role.USER);
         return userRepository.save(newUser);
     }
 
@@ -39,5 +43,17 @@ public class UserService {
     public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("사용자를 찾을 수 없습니다."));
+    }
+
+    public void changePassword(String email, String currentPassword, String newPassword) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalStateException("사용자를 찾을 수 없습니다."));
+
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new IllegalStateException("현재 비밀번호가 올바르지 않습니다.");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setMustChangePassword(false);
     }
 }

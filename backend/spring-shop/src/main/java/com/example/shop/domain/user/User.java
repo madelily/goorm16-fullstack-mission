@@ -32,6 +32,12 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false, length = 50)
+    private String name;
+
+    @Column(nullable = false)
+    private boolean mustChangePassword;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private Role role;
@@ -45,7 +51,17 @@ public class User {
     public User(String email, String password, Role role) {
         this.email = Objects.requireNonNull(email, "email");
         this.password = Objects.requireNonNull(password, "password");
+        this.name = "사용자";
         this.role = Objects.requireNonNull(role, "role");
+        this.mustChangePassword = false;
+    }
+
+    public User(String email, String password, String name, Role role) {
+        this.email = Objects.requireNonNull(email, "email");
+        this.password = Objects.requireNonNull(password, "password");
+        this.name = Objects.requireNonNull(name, "name");
+        this.role = Objects.requireNonNull(role, "role");
+        this.mustChangePassword = false;
     }
 
     @PrePersist
@@ -65,6 +81,22 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = Objects.requireNonNull(password, "password");
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isMustChangePassword() {
+        return mustChangePassword;
+    }
+
+    public void setMustChangePassword(boolean mustChangePassword) {
+        this.mustChangePassword = mustChangePassword;
     }
 
     public Role getRole() {
@@ -88,4 +120,3 @@ public class User {
         return (id == null) ? 0 : id.hashCode();
     }
 }
-
