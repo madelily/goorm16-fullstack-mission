@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { createOrder } from "../api/orders.js";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -8,6 +9,7 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
+  const [ordering, setOrdering] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -37,8 +39,17 @@ export default function ProductDetail() {
     };
   }, [id]);
 
-  function onOrderClick() {
-    navigate("/orders", { state: { productId: Number(id) } });
+  async function onOrderClick() {
+    if (ordering) return;
+    setOrdering(true);
+    try {
+      await createOrder({ productId: Number(id), quantity: 1, userId: 1 });
+      navigate("/orders");
+    } catch {
+      alert("주문 생성에 실패했습니다.");
+    } finally {
+      setOrdering(false);
+    }
   }
 
   return (
@@ -69,7 +80,7 @@ export default function ProductDetail() {
             </div>
 
             <button className="button" type="button" onClick={onOrderClick}>
-              주문하기
+              {ordering ? "주문 생성 중..." : "주문하기"}
             </button>
           </div>
         )}
@@ -77,4 +88,3 @@ export default function ProductDetail() {
     </div>
   );
 }
-

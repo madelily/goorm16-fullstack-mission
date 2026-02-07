@@ -197,6 +197,31 @@ img {
   margin-top: 4px;
 }
 
+.orderRow {
+  width: 100%;
+  padding: 10px 0;
+}
+
+.orderTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.orderId {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.orderStatus {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.orderMeta {
+  margin-top: 4px;
+}
+
 .detail {
   display: grid;
   gap: 10px;
