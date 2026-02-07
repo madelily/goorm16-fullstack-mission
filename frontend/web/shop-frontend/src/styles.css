@@ -143,10 +143,21 @@ img {
 }
 
 .listItem {
+  padding: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.listItemLink {
   display: flex;
   gap: 10px;
   padding: 10px 0;
-  border-bottom: 1px solid var(--border);
+  color: inherit;
+  text-decoration: none;
+}
+
+.listItemLink:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .thumb {
@@ -184,4 +195,56 @@ img {
 
 .itemMeta {
   margin-top: 4px;
+}
+
+.detail {
+  display: grid;
+  gap: 10px;
+}
+
+.detailTop {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.detailThumb {
+  width: 72px;
+  height: 72px;
+}
+
+.detailTitle {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.detailName {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.detailPrice {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.detailSection {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.detailLabel {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.detailText {
+  font-size: 14px;
+  line-height: 1.45;
+  white-space: pre-wrap;
 }

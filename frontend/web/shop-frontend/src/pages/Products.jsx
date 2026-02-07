@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Products() {
   const [loading, setLoading] = useState(true);
@@ -45,16 +46,18 @@ export default function Products() {
           <ul className="list">
             {products.map((p) => (
               <li key={p.id} className="listItem">
-                <div className="thumb" aria-hidden="true" />
-                <div className="itemBody">
-                  <div className="itemTop">
-                    <span className="itemName">{p.name}</span>
-                    <span className="itemPrice">{p.price}원</span>
+                <Link to={`/products/${p.id}`} className="listItemLink">
+                  <div className="thumb" aria-hidden="true" />
+                  <div className="itemBody">
+                    <div className="itemTop">
+                      <span className="itemName">{p.name}</span>
+                      <span className="itemPrice">{p.price}원</span>
+                    </div>
+                    <div className="itemMeta">
+                      <span className="muted">재고 {p.stock}</span>
+                    </div>
                   </div>
-                  <div className="itemMeta">
-                    <span className="muted">재고 {p.stock}</span>
-                  </div>
-                </div>
+                </Link>
               </li>
             ))}
           </ul>
