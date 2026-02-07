@@ -6,6 +6,7 @@ import ProductDetail from "./pages/ProductDetail.jsx";
 import Signup from "./pages/Signup.jsx";
 import OrderHistory from "./pages/OrderHistory.jsx";
 import OrderDetail from "./pages/OrderDetail.jsx";
+import PasswordReset from "./pages/PasswordReset.jsx";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
       <Route path="/products/:id" element={<ProductDetail />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/password-reset" element={<PasswordReset />} />
 
       {/* 로그인 필요 (서버에서 보호됨) */}
       <Route path="/orders" element={<Orders />} />

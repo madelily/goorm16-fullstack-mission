@@ -28,3 +28,5 @@ logging:
 app:
   mail:
     from: help@sampleshop.test
+  cors:
+    allowed-origins: "http://localhost:5173"

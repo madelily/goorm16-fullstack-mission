@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../api/users.js";
+import SiteHeader from "../components/SiteHeader.jsx";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -27,14 +28,16 @@ export default function Signup() {
 
   return (
     <div className="page">
-      <header className="header">
+      <SiteHeader />
+
+      <header className="header authHeader">
         <h1 className="title">회원가입</h1>
         <p className="subtitle">
           이미 계정이 있나요? <Link to="/login">로그인</Link>
         </p>
       </header>
 
-      <main>
+      <main className="authMain">
         <form onSubmit={onSubmit} className="form">
           <label className="field">
             <span className="label">이메일</span>
@@ -80,4 +83,3 @@ export default function Signup() {
     </div>
   );
 }
-
